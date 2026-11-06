@@ -1,0 +1,165 @@
+{
+ "seed": 997,
+ "predictions": {
+  "ml_f1": {
+   "text": "F1 ~0.5, recall cao hơn precision vì dữ liệu bị lệch, các mẫu có nhãn dương chiếm phần nhiều",
+   "time": "13:36:05"
+  },
+  "ml_lr": {
+   "text": "lr=0.001 thì đường loss sẽ giảm chậm, lr=50 thì đường loss có thể sẽ đi ngang hoặc tăng lên",
+   "time": "13:36:15"
+  },
+  "dl_curve": {
+   "text": "val loss không giảm mãi, mlp sẽ hơn logreg về F1",
+   "time": "13:37:16"
+  },
+  "dl_relu": {
+   "text": "tương đương với mô hình linear regression. F1 sẽ giảm rõ rệt",
+   "time": "13:37:28"
+  },
+  "emb_search": {
+   "text": "Kết quả gần nhất là ham",
+   "time": "13:39:43"
+  },
+  "emb_tricky": {
+   "text": "Encode + Logreg đúng nhiều hơn",
+   "time": "13:40:58"
+  },
+  "llm_models": {
+   "text": "Model gpt-6.1-terra có F1 cao hơn khoảng 0.2. Model đắt gấp rất nhiều lần. LLM có thể sẽ thắng nhưng với bài toán đơn giản thì mô hình 3b có thể vượt trội hơn về tốc độ",
+   "time": "16:34:51"
+  },
+  "llm_fewshot": {
+   "text": "F1 tăng, chi phí tăng khoảng 4 lần",
+   "time": "16:35:57"
+  },
+  "tradeoff": {
+   "text": "Cách Encoder + MLP head",
+   "time": "16:38:25"
+  },
+  "hard_eval": {
+   "text": "(1) khoảng 60% (2) Nhóm transactional_ham và obfuscation",
+   "time": "16:40:29"
+  }
+ },
+ "checks": {
+  "1.1 vectorize": true,
+  "1.2 sigmoid / predict_proba": true,
+  "1.3 train_logreg": true,
+  "1.4 metrics": true,
+  "2.1 build_mlp": true,
+  "2.2 train_mlp": true,
+  "3.1–3.2 cosine / top_k_similar": true,
+  "3.3 knn_predict": true,
+  "4.2–4.3 prompt / parse_label": true,
+  "4.1 + 4.4 call_openai / llm_classify_batch": true
+ },
+ "experiments": [
+  {
+   "key": "ml_f1",
+   "time": "13:36:05"
+  },
+  {
+   "key": "ml_lr",
+   "time": "13:36:15"
+  },
+  {
+   "key": "dl_curve",
+   "time": "13:37:16"
+  },
+  {
+   "key": "dl_relu",
+   "time": "13:37:28"
+  },
+  {
+   "key": "emb_search",
+   "time": "13:39:43"
+  },
+  {
+   "key": "emb_tricky",
+   "time": "13:40:58"
+  },
+  {
+   "key": "llm_models",
+   "time": "16:34:52"
+  },
+  {
+   "key": "llm_models",
+   "time": "16:34:58"
+  },
+  {
+   "key": "llm_fewshot",
+   "time": "16:35:58"
+  },
+  {
+   "key": "tradeoff",
+   "time": "16:38:27"
+  },
+  {
+   "key": "hard_eval",
+   "time": "16:40:31"
+  }
+ ],
+ "results": {
+  "1. BoW + LogReg (tự code)": {
+   "accuracy": 0.9716129032258064,
+   "precision": 1.0,
+   "recall": 0.7904761904761904,
+   "f1": 0.8829787234042553,
+   "f1_SUB": 0.9189189189189189,
+   "train_s": 8.311083887999985,
+   "msg_per_s": 5029.19897767517,
+   "p50_ms": 0.051832999986345385,
+   "p95_ms": 0.10717230002228459,
+   "usd_per_1k": 0.0
+  },
+  "2. BoW + MLP (deep learning)": {
+   "accuracy": 0.9883870967741936,
+   "precision": 1.0,
+   "recall": 0.9142857142857143,
+   "f1": 0.955223880597015,
+   "f1_SUB": 0.9743589743589743,
+   "train_s": 11.454148666000037,
+   "msg_per_s": 29186.52888414079,
+   "p50_ms": 0.276415499996574,
+   "p95_ms": 0.3531998999903862,
+   "usd_per_1k": 0.0
+  },
+  "3a. Encoder (MiniLM) + kNN": {
+   "accuracy": 0.9741935483870968,
+   "precision": 0.8761061946902655,
+   "recall": 0.9428571428571428,
+   "f1": 0.9082568807339451,
+   "f1_SUB": 0.975609756097561,
+   "train_s": 70.57975780200002,
+   "msg_per_s": 30.73034570430438,
+   "p50_ms": 42.02021649996368,
+   "p95_ms": 53.0449428499935,
+   "usd_per_1k": 0.0
+  },
+  "3b. Encoder (MiniLM) + LogReg": {
+   "accuracy": 0.9909677419354839,
+   "precision": 0.9622641509433962,
+   "recall": 0.9714285714285714,
+   "f1": 0.9668246445497629,
+   "f1_SUB": 0.975609756097561,
+   "train_s": 70.99363134800001,
+   "msg_per_s": 34.72641150324059,
+   "p50_ms": 26.207792500002824,
+   "p95_ms": 33.93094344999667,
+   "usd_per_1k": 0.0
+  },
+  "3c. Encoder (MiniLM) + MLP head": {
+   "accuracy": 0.9896774193548387,
+   "precision": 0.970873786407767,
+   "recall": 0.9523809523809523,
+   "f1": 0.9615384615384616,
+   "f1_SUB": 0.975609756097561,
+   "train_s": 71.452952643,
+   "msg_per_s": 34.77116355249471,
+   "p50_ms": 25.484857500032376,
+   "p95_ms": 33.35402929996007,
+   "usd_per_1k": 0.0
+  }
+ }
+}
