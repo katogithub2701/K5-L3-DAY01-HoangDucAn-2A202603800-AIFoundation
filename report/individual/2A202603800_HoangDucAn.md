@@ -16,26 +16,13 @@
 
 ## 2. Kết quả chính
 
-                                 precision  recall  F1 (test)  F1 (SUB 40)  \
-1. BoW + LogReg (tự code)            1.000   0.790      0.883        0.919   
-2. BoW + MLP (deep learning)         1.000   0.914      0.955        0.974   
-3a. Encoder (MiniLM) + kNN           0.876   0.943      0.908        0.976   
-3b. Encoder (MiniLM) + LogReg        0.962   0.971      0.967        0.976   
-3c. Encoder (MiniLM) + MLP head      0.971   0.952      0.962        0.976   
-
-                                 train (s)  tin/s (cả lô)  p50 ms/tin  \
-1. BoW + LogReg (tự code)            8.311       5029.199       0.052   
-2. BoW + MLP (deep learning)        11.454      29186.529       0.276   
-3a. Encoder (MiniLM) + kNN          70.580         30.730      42.020   
-3b. Encoder (MiniLM) + LogReg       70.994         34.726      26.208   
-3c. Encoder (MiniLM) + MLP head     71.453         34.771      25.485   
-
-                                 p95 ms/tin  USD / 1k tin  
-1. BoW + LogReg (tự code)             0.107           0.0  
-2. BoW + MLP (deep learning)          0.353           0.0  
-3a. Encoder (MiniLM) + kNN           53.045           0.0  
-3b. Encoder (MiniLM) + LogReg        33.931           0.0  
-3c. Encoder (MiniLM) + MLP head      33.354           0.0  
+| Model | Precision | Recall | F1 (test) | F1 (SUB 40) | Train (s) | Tin/s (cả lô) | p50 ms/tin | p95 ms/tin | USD / 1k tin |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **1. BoW + LogReg (tự code)** | 1.000 | 0.790 | 0.883 | 0.919 | 8.311 | 5,029.20 | 0.052 | 0.107 | 0.0 |
+| **2. BoW + MLP (deep learning)** | 1.000 | 0.914 | 0.955 | 0.974 | 11.454 | 29,186.53 | 0.276 | 0.353 | 0.0 |
+| **3a. Encoder (MiniLM) + kNN** | 0.876 | 0.943 | 0.908 | 0.976 | 70.580 | 30.73 | 42.020 | 53.045 | 0.0 |
+| **3b. Encoder (MiniLM) + LogReg** | 0.962 | 0.971 | **0.967** | **0.976** | 70.994 | 34.73 | 26.208 | 33.931 | 0.0 |
+| **3c. Encoder (MiniLM) + MLP head** | 0.971 | 0.952 | 0.962 | **0.976** | 71.453 | 34.77 | 25.485 | 33.354 | 0.0 |
 
 ## 3. Dự đoán và thực tế
 
