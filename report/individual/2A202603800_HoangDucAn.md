@@ -27,7 +27,9 @@
 ## 3. Dự đoán và thực tế
 
 Dự đoán 1: **Đoán**: F1 ~0.5, recall cao hơn precision vì dữ liệu bị lệch, các mẫu có nhãn dương chiếm phần nhiều, **Ra**: F1 ~0.88 precision cao hơn recall, **Lệch** vì hiểu sai về dữ liệu
+
 Dự đoán 2: **Đoán**: lr=50 thì đường loss có thể sẽ đi ngang hoặc tăng lên, **Ra**: Đường loss đi mạnh xuống và đi ngang, **Lệch** vì khi lr lớn thì đồ thị loss sẽ khó đoán hơn
+
 Dự đoán 3: **Đoán**: tương đương với mô hình linear regression. F1 sẽ giảm rõ rệt **Ra**: F1 tăng cao, **Lệch** vì dữ liệu tuyến tính
 
 ## 4. Phân tích 50 case khó
@@ -37,7 +39,9 @@ Mô hình BoW + LogReg giảm nhiều nhất. Với case Tháo túng/lừa đả
 ## 5. Thử thách cá nhân
 
 Thay đổi max_tokens trong hàm build_vocab và train lại mô hình:
+
 Kết quả: Với vocab = 100, F1_test = 0.085; Với vocab = 5000, F1_test = 0.883.
+
 Giải thích: Từ điển có quá ít từ sẽ khiến mô hình có ít thông tin với các từ quan trọng để phân loại nhãn, từ đó khó phân loại chính xác hơn.
 
 ## 6. Phương án cho sản phẩm thật
@@ -47,5 +51,7 @@ Cách Encoder + LogReg đạt cả độ trễ và chất lượng. Ước tính
 ## 7. AI log và điều đã học
 
 Câu 1 - Hỏi: Đối với reasoning model, nếu đặt max_tokens = 3 sẽ như thế nào, Nhận: Quy trình suy luận bị ngắt, không in ra kết quả
+
 Câu 2 - Hỏi: Gửi đoạn mã lỗi và giải thích, Nhận: Giải thích về mã lỗi
+
 Học được: Mô hình lớn hơn, phức tạp hơn chưa chắc có kết quả tốt nhất, cần phải dựa vào các yếu tố như độ phức tạp bài toán, độ trễ, độ chính xác,...
