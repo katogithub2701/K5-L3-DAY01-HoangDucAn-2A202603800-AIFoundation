@@ -32,14 +32,20 @@ Dự đoán 3: **Đoán**: tương đương với mô hình linear regression. F
 
 ## 4. Phân tích 50 case khó
 
+Mô hình BoW + LogReg giảm nhiều nhất. Với case Tháo túng/lừa đảo: Do đặc trưng từ BoW không thể hiện được ý nghĩa của ngữ cảnh, mối liên hệ giữa các từ. Với case Spam giọng tự nhiên: Do đặc trưng từ BoW chỉ thể hiện sự xuất hiện của từ trong câu, không mang ý nghĩa ngữ cảnh
 
 ## 5. Thử thách cá nhân
 
+Thay đổi max_tokens trong hàm build_vocab và train lại mô hình:
+Kết quả: Với vocab = 100, F1_test = 0.085; Với vocab = 5000, F1_test = 0.883.
+Giải thích: Từ điển có quá ít từ sẽ khiến mô hình có ít thông tin với các từ quan trọng để phân loại nhãn, từ đó khó phân loại chính xác hơn.
 
 ## 6. Phương án cho sản phẩm thật
 
-Với yêu cầu p95 < 50 ms/tin cho 10 triệu SMS/ngày: Chọn phương Encoder + MLP. Vì có p95, p50 thấp nhưng đánh đổi là huấn luyện lâu hơn.
+Cách Encoder + LogReg đạt cả độ trễ và chất lượng. Ước tính khoảng 3700$ 1 tháng nếu dùng mỗi 1M Token = 0.15$ nếu sử dụng LLM
 
 ## 7. AI log và điều đã học
 
-
+Câu 1 - Hỏi: Đối với reasoning model, nếu đặt max_tokens = 3 sẽ như thế nào, Nhận: Quy trình suy luận bị ngắt, không in ra kết quả
+Câu 2 - Hỏi: Gửi đoạn mã lỗi và giải thích, Nhận: Giải thích về mã lỗi
+Học được: Mô hình lớn hơn, phức tạp hơn chưa chắc có kết quả tốt nhất, cần phải dựa vào các yếu tố như độ phức tạp bài toán, độ trễ, độ chính xác,...
